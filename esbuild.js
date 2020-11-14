@@ -26,6 +26,8 @@ const sightreadingResolve = {
 
 require('esbuild').build({
   entryPoints: ['static/js/main.es6'],
+  platform: 'browser',
+  target: 'safari11',
   bundle: true,
   outfile: 'bundle.js',
   plugins: [sightreadingResolve]

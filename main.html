@@ -8,14 +8,19 @@
 <body>
   <div id="page"></div>
   <script defer>
-    delete window.history.pushState
+    // console.log = function() { document.write(Array.prototype.join.call(arguments, ' ')); }
+    // console.warn = function() { document.write(Array.prototype.join.call(arguments, ' ')); }
+    // console.error = function() { document.write(Array.prototype.join.call(arguments, ' ')); }
+    if (!window.AudioContext) {
+      window.AudioContext = window.webkitAudioContext
+    }
     process = { env: { NODE_ENV: "devel" } }
     N = {}
     function bundleonload() {
       N.init();
     }
   </script>
-  <script src="./bundle.js" onload="bundleonload()" defer></script>
+  <script src="./bundle.js" onload="bundleonload()"></script>
 </body>
 
 </html>
