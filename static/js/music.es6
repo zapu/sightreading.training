@@ -1,6 +1,5 @@
 
 import "st/note_list"
-import require from "require"
 
 export const MIDDLE_C_PITCH = 60
 export const OCTAVE_SIZE = 12

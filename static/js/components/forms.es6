@@ -1,9 +1,10 @@
 
 import * as React from "react"
 import {csrfToken} from "st/globals"
-import {FormData, XMLHttpRequest} from "window"
 import {classNames} from "lib"
 import * as types from "prop-types"
+
+const {FormData, XMLHttpRequest} = window
 
 export class TextInputRow extends React.Component {
   static propTypes = {

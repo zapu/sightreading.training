@@ -23,7 +23,10 @@ import * as React from "react"
 import {BrowserRouter, Route, Switch} from "react-router-dom"
 
 import {TransitionGroup, CSSTransition} from "react-transition-group"
-import {SampleOutput} from "st/sample_output"
+
+
+// FIXME: wtf is "Soundfont"?
+// import {SampleOutput} from "st/sample_output"
 
 class Layout extends React.Component {
   constructor(props) {

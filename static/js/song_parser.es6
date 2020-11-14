@@ -1,4 +1,5 @@
 
+// FIXME: do not prebuild song_parser_peg.pegjs
 import peg from "st/song_parser_peg"
 import {parseNote, noteName, KeySignature} from "st/music"
 
