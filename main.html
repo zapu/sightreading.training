@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="static/scss/bundle.css">
+</head>
+
+<body>
+  <div id="page"></div>
+  <script defer>
+    delete window.history.pushState
+    process = { env: { NODE_ENV: "devel" } }
+    N = {}
+    function bundleonload() {
+      N.init();
+    }
+  </script>
+  <script src="./bundle.js" onload="bundleonload()" defer></script>
+</body>
+
+</html>

@@ -12,7 +12,7 @@ N.init = init
 export function init(session) {
   N.session = session || {}
   ReactDOM.render(<App />, document.getElementById("page"));
-  installServiceWorker(session.cacheBuster)
+  // installServiceWorker(session.cacheBuster)
 }
 
 export function testPage(session) {
