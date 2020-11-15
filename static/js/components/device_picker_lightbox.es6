@@ -40,7 +40,12 @@ export default class DevicePickerLightbox extends Lightbox {
 
   midiInputs() {
     if (!this.props.midi) return []
-    return [...this.props.midi.inputs.values()]
+    const vals = this.props.midi.inputs.values()
+    if (vals._items) {
+      // ios wtf
+      return vals._items
+    }
+    return [...vals]
   }
 
   renderOutputPicker() {

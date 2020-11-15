@@ -1,7 +1,7 @@
 
-import {noteName, parseNote} from "st/music"
-import {Soundfont} from "lib"
-import {BaseOutputChannel, MidiInput} from "st/midi"
+import { noteName, parseNote } from "st/music"
+import { Soundfont } from "lib"
+import { BaseOutputChannel, MidiInput } from "st/midi"
 
 export class SampleOutput extends BaseOutputChannel {
   static getInstance() {
@@ -11,16 +11,17 @@ export class SampleOutput extends BaseOutputChannel {
     return this.instance
   }
 
-  constructor(instrumentName="acoustic_grand_piano") {
+  constructor(instrumentName = "acoustic_grand_piano") {
     super()
     this.loading = true
     this.currentlyPlaying = {}
 
+    const AC = window.AudioContext ?? window.webkitAudioContext
     this.promise = Soundfont.instrument(
-      new AudioContext(),
+      new AC(),
       `/static/soundfonts/MusyngKite/${instrumentName}-mp3.js`
     )
-      
+
     this.promise.then((instrument) => {
       this.loading = false
       this.instrument = instrument

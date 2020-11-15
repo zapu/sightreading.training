@@ -198,7 +198,12 @@ class Layout extends React.Component {
 
   midiInputs() {
     if (!this.state.midi) return;
-    return [...this.state.midi.inputs.values()];
+    const vals = this.state.midi.inputs.values()
+    if (vals._items) {
+      // ios wtf
+      return vals._items
+    }
+    return [...vals]
   }
 
   setInput(idx) {

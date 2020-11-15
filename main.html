@@ -8,15 +8,23 @@
 <body>
   <div id="page"></div>
   <script defer>
-    // console.log = function() { document.write(Array.prototype.join.call(arguments, ' ')); }
-    // console.warn = function() { document.write(Array.prototype.join.call(arguments, ' ')); }
-    // console.error = function() { document.write(Array.prototype.join.call(arguments, ' ')); }
-    if (!window.AudioContext) {
-      window.AudioContext = window.webkitAudioContext
+    for (let m of ['log', 'warn', 'error']) {
+      const method = m
+      const orig = console[method]
+      console[method] = function (...args) {
+        fetch('/debug', {
+          method: 'POST',
+          body: `[${method}] ${args.join(' ')}`
+        })
+        orig.call(console, ...args)
+      }
     }
+    window.onerror = function (...args) { console.error('onerror', ...args) }
+    console.log('pre-init')
     process = { env: { NODE_ENV: "devel" } }
     N = {}
     function bundleonload() {
+      console.log('bundleonload')
       N.init();
     }
   </script>
