@@ -31,12 +31,17 @@ export default class SlideToZero {
       return
     }
 
-    let lastFrame = performance.now();
+    let lastFrame = undefined
     this.animating = true
     this.canceled = false
     this.onStart();
 
     let frameUpdate = time => {
+      if (lastFrame === undefined) {
+        lastFrame = time;
+        window.requestAnimationFrame(frameUpdate);
+        return
+      }
       let dt = (time - lastFrame) / 1000;
       lastFrame = time;
 
