@@ -1,6 +1,7 @@
 /*global N*/
 
 import NoteList from "st/note_list"
+import NoteListView from "st/note_list_view"
 import ChordList from "st/chord_list"
 import NoteStats from "st/note_stats"
 import SlideToZero from "st/slide_to_zero"
@@ -153,7 +154,7 @@ export default class SightReadingPage extends React.Component {
 
     switch (generator.mode) {
       case "notes":
-        notes = new NoteList([], { generator: generatorInstance })
+        notes = new NoteListView([], { generator: generatorInstance })
         break
       case "chords":
         notes = new ChordList([], { generator: generatorInstance })
@@ -233,8 +234,9 @@ export default class SightReadingPage extends React.Component {
         if (this.state.notes.matchesHead(touched, this.state.anyOctave)) {
           gaEvent("sight_reading", "note", "hit");
 
-          this.state.notes.shift();
+          this.state.notes.advance();
           this.state.notes.pushRandom();
+
           this.state.stats.hitNotes(touched);
 
           this.setState({
@@ -244,7 +246,7 @@ export default class SightReadingPage extends React.Component {
             touchedNotes: {},
           });
 
-          this.state.slider.add(1)
+          // this.state.slider.add(1)
 
           return true
         } else {
