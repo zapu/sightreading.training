@@ -13,11 +13,26 @@ export default class StaffNotes extends React.Component {
     keySignature: types.object.isRequired,
     noteWidth: types.number.isRequired,
     notes: types.array.isRequired,
+    noteListPos: types.number.isRequired,
 
     upperRow: types.number.isRequired,
     lowerRow: types.number.isRequired,
     heldNotes: types.object.isRequired,
     noteShaking: types.bool,
+  }
+
+  constructor() {
+    super()
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.notes.pos != prevProps.noteListPos) {
+      this.refs.note_marker.style.animation = null
+      // Trigger reflow to reset animation.
+      this.refs.note_marker.offsetHeight;
+      this.refs.note_marker.style.animationName = "note_marker_scroll"
+      this.refs.note_marker.style.animationDuration = "0.1s"
+    }
   }
 
   render() {
@@ -26,6 +41,13 @@ export default class StaffNotes extends React.Component {
 
     let count = Math.abs(this.props.keySignature.count)
     let keySignatureWidth = count > 0 ? count * 20 + 20 : 0;
+
+    let markerLeft = this.props.notes.pos * this.props.noteWidth + 20 + keySignatureWidth
+    let noteMarkerStyle = {
+      left: `${markerLeft}px`,
+      top: "-50%",
+      height: "200%",
+    }
 
     return <div ref="notes" className={this.classNames()}>
       <LedgerLines key="ledger_lines"
@@ -57,6 +79,7 @@ export default class StaffNotes extends React.Component {
       />
 
       {this.renderAnnotations()}
+      <div ref="note_marker" className="note_marker" style={noteMarkerStyle} />
     </div>
   }
 

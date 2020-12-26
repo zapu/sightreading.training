@@ -173,6 +173,8 @@ export default class SightReadingPage extends React.Component {
   checkRelease() {
     switch (this.state.currentGenerator.mode) {
       case "notes": {
+        // `checkRelease` is only called in "notes" mode when there are notes
+        // left in `state.heldNotes` after `checkPress`.
         let missed = this.state.notes.currentColumn()
           .filter((n) => !this.state.heldNotes[n]);
 
@@ -236,9 +238,14 @@ export default class SightReadingPage extends React.Component {
 
           this.state.notes.advance();
           this.state.notes.pushRandom();
+          if (this.state.notes.pos == 8) {
+            this.state.notes.pos = 0;
+            this.state.notes.splice(0, 8)
+          }
 
           this.state.stats.hitNotes(touched);
 
+          // Clearing `heldNotes` makes us not call `checkRelease`.
           this.setState({
             notes: this.state.notes,
             noteShaking: false,
@@ -340,6 +347,7 @@ export default class SightReadingPage extends React.Component {
   }
 
   enterScrollMode() {
+    throw new Error("scrollMode WIP")
     let noteWidth = DEFAULT_NOTE_WIDTH * 2;
 
     if (this.state.slider) {
@@ -584,9 +592,14 @@ export default class SightReadingPage extends React.Component {
 
     let staff
     if (this.state.currentStaff && this.state.notes) {
+      // Need to send over both `notes` and `notePos` so componentDidUpdate can
+      // set up scrolling animations properly. componentDidUpdate gets
+      // prevProps to compare with current props, but stuff it `notes` will be
+      // the same in both since it's the same instance of NoteListView.
       staff = this.state.currentStaff.render.call(this, {
         heldNotes: this.state.heldNotes,
         notes: this.state.notes,
+        noteListPos: this.state.notes.pos,
         keySignature: this.state.keySignature,
         noteWidth: this.state.noteWidth,
         noteShaking: this.state.noteShaking,

@@ -23,9 +23,10 @@ export class Staff extends React.Component {
     cleffImage: types.string.isRequired,
     staffClass: types.string.isRequired,
     keySignature: types.object,
-
+    
     // state props
     notes: types.array.isRequired,
+    noteListPos: types.number.isRequired,
     heldNotes: types.object.isRequired,
     inGrand: types.bool,
     scale: types.number,
@@ -105,6 +106,12 @@ export class Staff extends React.Component {
       if (marginTop < DEFAULT_MARGIN) {
         marginTop = null
       }
+    }
+
+    let noteMarkerStyle = {
+      width: 1 * Math.max(1, this.props.scale || 1),
+      height: height,
+      left: `${123}px`,
     }
 
     return <div

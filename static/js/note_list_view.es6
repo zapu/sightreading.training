@@ -1,5 +1,5 @@
 import NoteList from "st/note_list"
-import {parseNote, noteName, MIDDLE_C_PITCH} from "st/music"
+import {parseNote, notesSame, noteName, MIDDLE_C_PITCH} from "st/music"
 
 export default class NoteListView extends NoteList {
   constructor(notes, opts = {}) {

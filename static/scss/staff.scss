@@ -254,6 +254,21 @@
         left: 120 + 100px;
     }
 
+    @keyframes note_marker_scroll {
+        0% {
+            transform: translateX(-100px);
+        }
+        100% {
+            transform: translateX(0px);
+        }
+    }
+
+    .note_marker {
+        position: absolute;
+        width: 2px;
+        background-color: #999;
+
+    }
 }
 
 
