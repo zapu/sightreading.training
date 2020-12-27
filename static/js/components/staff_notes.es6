@@ -44,15 +44,18 @@ export default class StaffNotes extends React.Component {
     let count = Math.abs(this.props.keySignature.count)
     let keySignatureWidth = count > 0 ? count * 20 + 20 : 0;
 
-    let markerLeft =
+    const markerLeft =
       this.props.notes.pos * this.props.noteWidth +
       20 * this.props.scale +
       keySignatureWidth;
-    let noteMarkerStyle = {
+    const noteMarkerStyle = {
       left: `${markerLeft}px`,
       top: "-50%",
       height: "200%",
     }
+
+    const heldNotesOffset =
+      this.props.notes.pos * this.props.noteWidth + keySignatureWidth;
 
     return <div ref="notes" className={this.classNames()}>
       <LedgerLines key="ledger_lines"
@@ -93,14 +96,15 @@ export default class StaffNotes extends React.Component {
       return []
     }
 
-    let notes = new SongNoteList()
-    let dur = 40 / this.props.noteWidth
+    const notes = new SongNoteList()
+    const dur = 40 / this.props.noteWidth
+    const notePos = this.props.notes.pos
 
     // notes that are held down but aren't correct
     Object.keys(this.props.heldNotes)
       .filter((note) => !this.props.notes.inHead(note))
       .forEach((note, idx) => {
-        notes.push(new SongNote(note, 0, dur))
+        notes.push(new SongNote(note, notePos, dur))
       })
 
     return this.filterVisibleNotes(notes)
@@ -147,7 +151,7 @@ export default class StaffNotes extends React.Component {
 
     this.props.notes.forEach((column, columnIdx) => {
       let withClasses = (note) => {
-        if (columnIdx == 0) {
+        if (columnIdx == this.props.notes.pos) {
           if (this.props.noteShaking) {
             appendClass(note, "noteshake")
           }
