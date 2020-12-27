@@ -66,6 +66,16 @@ export default class SightReadingPage extends React.Component {
     {
       this.refreshNoteList()
     }
+
+    if (prevState.keySignature.count != this.state.keySignature.count) {
+      if (Math.abs(this.state.keySignature.count) > 4) {
+        this.setState({ noteWidth: 90 })
+      } else if (this.state.noteWidth < DEFAULT_NOTE_WIDTH) {
+        // Restore note-width if we've previously been in a "long" key
+        // signature.
+        this.setState({ noteWidth: DEFAULT_NOTE_WIDTH })
+      }
+    }
   }
 
   componentDidMount() {
