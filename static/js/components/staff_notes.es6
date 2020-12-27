@@ -27,11 +27,13 @@ export default class StaffNotes extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.notes.pos != prevProps.noteListPos) {
-      this.refs.note_marker.style.animation = null
-      // Trigger reflow to reset animation.
-      this.refs.note_marker.offsetHeight;
-      this.refs.note_marker.style.animationName = "note_marker_scroll"
-      this.refs.note_marker.style.animationDuration = "0.1s"
+      const nm = this.refs.note_marker
+      nm.style.animation = null
+      nm.offsetHeight; // Trigger reflow to reset animation.
+      nm.style.setProperty("--scrollOffsetLeft", `${-this.props.noteWidth}px`)
+      nm.style.animationName = "note_marker_scroll"
+      nm.style.animationDuration = "0.2s"
+      nm.style.animationFillMode = "forwards"
     }
   }
 
@@ -42,7 +44,10 @@ export default class StaffNotes extends React.Component {
     let count = Math.abs(this.props.keySignature.count)
     let keySignatureWidth = count > 0 ? count * 20 + 20 : 0;
 
-    let markerLeft = this.props.notes.pos * this.props.noteWidth + 20 + keySignatureWidth
+    let markerLeft =
+      this.props.notes.pos * this.props.noteWidth +
+      20 * this.props.scale +
+      keySignatureWidth;
     let noteMarkerStyle = {
       left: `${markerLeft}px`,
       top: "-50%",

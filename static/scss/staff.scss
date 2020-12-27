@@ -256,7 +256,7 @@
 
     @keyframes note_marker_scroll {
         0% {
-            transform: translateX(-100px);
+            transform: translateX(var(--scrollOffsetLeft));
         }
         100% {
             transform: translateX(0px);
