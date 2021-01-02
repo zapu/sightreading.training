@@ -41,7 +41,7 @@ export const STAVES = [
   {
     mode: "notes",
     name: "treble",
-    range: ["A4", "C7"],
+    range: ["A3", "C8"],
     render: function(props=this.state) {
       return <GStaff
         ref={(staff) => this.staff = staff}
