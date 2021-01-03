@@ -66,12 +66,11 @@ export default class Select extends React.Component {
 
   // name of what's currently selected
   currentOption() {
-    let searchValue = this.props.value || this.state.value
-
+    const searchValue = this.props.value || this.state.value
+    let ret
     if (searchValue != undefined) {
-      return this.findOption(searchValue)
-    } else {
-      return this.props.options[0]
+      ret = this.findOption(searchValue)
     }
+    return ret ? ret : this.props.options[0]
   }
 }
