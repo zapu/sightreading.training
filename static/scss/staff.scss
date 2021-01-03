@@ -1,5 +1,8 @@
 @import "include/common";
 
+// ????
+$line_spacing: 20px;
+
 .grand_staff {
     .staff {
         &:first-child {
@@ -10,9 +13,10 @@
 
 .staff {
     position: relative;
-    height: $line_spacing * 4;
+    // height and margin is defined dynamically in code, see staves.es6
+    // height: $line_spacing * 4;
     border-left: 6px solid black;
-    margin: $line_spacing*6 0 $line_spacing*6 0;
+    // margin: $line_spacing*4 0 $line_spacing*4 0;
 
     .cleff {
         z-index: 1;

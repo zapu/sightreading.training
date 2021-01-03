@@ -12,7 +12,7 @@ import {parseNote, noteStaffOffset, MIDDLE_C_PITCH} from "st/music"
 import StaffNotes from "st/components/staff_notes"
 import StaffSongNotes from "st/components/staff_song_notes"
 
-const DEFAULT_HEIGHT = 120
+const DEFAULT_HEIGHT = 100
 const DEFAULT_MARGIN = 60
 
 export class Staff extends React.Component {
@@ -23,7 +23,7 @@ export class Staff extends React.Component {
     cleffImage: types.string.isRequired,
     staffClass: types.string.isRequired,
     keySignature: types.object,
-    
+
     // state props
     notes: types.array.isRequired,
     noteListPos: types.number.isRequired,
@@ -86,32 +86,21 @@ export class Staff extends React.Component {
 
     let height = DEFAULT_HEIGHT * (this.props.scale || 1)
 
-    let noteHeight = height * 0.2 // height of 1 bar
-
-    let [minRow, maxRow] = this.notesRowRange()
-
     let marginTop, marginBottom
+
+    const noteHeight = height * 0.2 // height of 1 bar
+    const [minRow, maxRow] = this.notesRowRange()
 
     if (minRow != null && minRow < this.props.lowerRow) {
       marginBottom = noteHeight * (this.props.lowerRow - minRow) / 2 + noteHeight
-
-      if (marginBottom < DEFAULT_MARGIN) {
-        marginBottom = null
-      }
+    } else {
+      marginBottom = height*2
     }
 
     if (maxRow != null && maxRow > this.props.upperRow) {
       marginTop = noteHeight * (maxRow - this.props.upperRow) / 2 + noteHeight
-
-      if (marginTop < DEFAULT_MARGIN) {
-        marginTop = null
-      }
-    }
-
-    let noteMarkerStyle = {
-      width: 1 * Math.max(1, this.props.scale || 1),
-      height: height,
-      left: `${123}px`,
+    } else {
+      marginTop = height*2
     }
 
     return <div

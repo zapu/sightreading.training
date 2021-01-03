@@ -44,14 +44,15 @@ export default class StaffNotes extends React.Component {
     let count = Math.abs(this.props.keySignature.count)
     let keySignatureWidth = count > 0 ? count * 20 + 20 : 0;
 
+    // 16.5 is the note width - I don't know how to arrive at this constant.
     const markerLeft =
       this.props.notes.pos * this.props.noteWidth +
-      20 * this.props.scale +
+      16.5 * this.props.scale +
       keySignatureWidth;
     const noteMarkerStyle = {
       left: `${markerLeft}px`,
-      top: "-50%",
-      height: "200%",
+      top: "-100%",
+      height: "400%",
     }
 
     const heldNotesOffset =
