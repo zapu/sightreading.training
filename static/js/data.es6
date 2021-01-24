@@ -52,7 +52,7 @@ export const STAVES = [
   {
     mode: "notes",
     name: "bass",
-    range: ["C3", "E5"],
+    range: ["C2", "E6"],
     render: function(props=this.state) {
       return <FStaff
         ref={(staff) => this.staff = staff}
