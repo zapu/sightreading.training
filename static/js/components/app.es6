@@ -20,7 +20,7 @@ import {readConfig, writeConfig} from "st/config"
 import {csrfToken} from "st/globals"
 
 import * as React from "react"
-import {BrowserRouter, Route, Switch} from "react-router-dom"
+import {HashRouter, Route, Switch} from "react-router-dom"
 
 import {TransitionGroup, CSSTransition} from "react-transition-group"
 
@@ -285,8 +285,8 @@ export default class App extends React.Component {
   static Layout = Layout
 
   render() {
-    return <BrowserRouter>
+    return <HashRouter>
       <Layout />
-    </BrowserRouter>
+    </HashRouter>
   }
 }
