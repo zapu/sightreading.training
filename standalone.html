@@ -8,6 +8,12 @@
 <body>
   <div id="page"></div>
   <script>
+    {
+      const locationStr = window.location.toString()
+      if (!locationStr.endsWith('.html') && !locationStr.endsWith('/')) {
+        window.location = locationStr + '/'
+      }
+    }
     process = { env: { NODE_ENV: "devel" } }
     N = {}
     function bundleonload() {

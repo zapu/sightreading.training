@@ -45,7 +45,7 @@ export default class MidiSelector extends React.PureComponent {
               }
             }}
             >
-            <img className="row_icon" src="/static/img/notes_icon.svg" alt="MIDI Device" />
+            <img className="row_icon" src="./static/img/notes_icon.svg" alt="MIDI Device" />
             <div className="input_name">
               {option.name}
             </div>

@@ -33,7 +33,7 @@ class GuideContents extends React.PureComponent {
     setTitle(this.props.title)
 
     const request = new XMLHttpRequest()
-    const url = `/static/guides/${this.props.pageSource}.json`
+    const url = `./static/guides/${this.props.pageSource}.json`
     request.open("GET", url)
     request.send()
 

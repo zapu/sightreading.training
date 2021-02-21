@@ -121,7 +121,7 @@ export default class MelodyRecognitionExercise extends React.Component {
     if (!this.melodyCache[name]) {
       this.melodyCache[name] = new Promise((resolve, reject) => {
         let request = new XMLHttpRequest()
-        request.open("GET", `/static/music/interval_melodies/${name}.lml?${+new Date()}`)
+        request.open("GET", `./static/music/interval_melodies/${name}.lml?${+new Date()}`)
         request.onerror = () => reject(request.statusText)
         request.onload = (e) => {
           let songText = request.responseText

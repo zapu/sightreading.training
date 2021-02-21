@@ -1,41 +1,22 @@
 
-.PHONY: new_migration migrate init_schema test_db lint lint_js checkpoint restore_checkpoint annotate_models
+.PHONY: bundle scss
 
-new_migration:
-	(echo "  [$$(date +%s)]: =>"; echo) >> migrations.moon
+all: bundle.js scss
 
-migrate:
-	lapis migrate
-	make schema.sql
+bundle.js: $(wildcard static/js/*.es6 static/js/**/*.es6)
+	node esbuild.js
 
-schema.sql:
-	pg_dump -s -U postgres sightreading > schema.sql
-	pg_dump -a -t lapis_migrations -U postgres sightreading >> schema.sql
+scss:
+	$(MAKE) -C static/scss bundle.css
 
-init_schema:
-	createdb -U postgres sightreading
-	cat schema.sql | psql -U postgres sightreading
+install:
+	@test $(INSTALL_PATH) || ( echo "INSTALL_PATH is not set"; exit 1 )
+	@test -d $(INSTALL_PATH) || ( echo "$(INSTALL_PATH) is not a directory"; exit 1 )
 
-test_db:
-	-dropdb -U postgres sightreading_test
-	createdb -U postgres sightreading_test
-	pg_dump -s -U postgres sightreading | psql -U postgres sightreading_test
-	pg_dump -a -t lapis_migrations -U postgres sightreading | psql -U postgres sightreading_test
-
-lint:
-	git ls-files | grep '\.moon$$' | grep -v config.moon | xargs -n 100 moonc -l
-
-lint_js:
-	node_modules/.bin/eslint $$(git ls-files | grep \.es6$$ | grep -v spec)
-
-checkpoint:
-	mkdir -p dev_backup
-	pg_dump -F c -U postgres sightreading > dev_backup/$$(date +%F_%H-%M-%S).dump
-
-restore_checkpoint:
-	-dropdb -U postgres sightreading
-	createdb -U postgres sightreading
-	pg_restore -U postgres -d sightreading $$(find dev_backup | grep \.dump | sort -V | tail -n 1)
-
-annotate_models:
-	lapis annotate $$(find models -type f | grep moon$$)
+	cp bundle.js "$(INSTALL_PATH)/"
+	cp standalone.html "$(INSTALL_PATH)/index.html"
+	mkdir -p "$(INSTALL_PATH)/static/scss"
+	cp static/scss/bundle.css "$(INSTALL_PATH)/static/scss/bundle.css"
+	cp -r static/img "$(INSTALL_PATH)/static/img"
+	cp -r static/svg "$(INSTALL_PATH)/static/svg"
+	cp -r static/soundfonts "$(INSTALL_PATH)/static/soundfonts"

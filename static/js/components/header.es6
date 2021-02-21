@@ -183,8 +183,8 @@ export default class Header extends React.Component {
 
     return <div className="header">
       <Link to="/" className="logo_link">
-        <img className="logo" src="/static/img/logo.svg" height="35" alt="" />
-        <img className="logo_small" src="/static/img/logo-small.svg" height="35" alt="" />
+        <img className="logo" src="./static/img/logo.svg" height="35" alt="" />
+        <img className="logo_small" src="./static/img/logo-small.svg" height="35" alt="" />
       </Link>
 
       <SizedElement className="user_links" onWidth={(w) => {

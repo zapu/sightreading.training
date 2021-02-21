@@ -19,7 +19,7 @@ export class SampleOutput extends BaseOutputChannel {
     const AC = window.AudioContext ?? window.webkitAudioContext
     this.promise = Soundfont.instrument(
       new AC(),
-      `/static/soundfonts/MusyngKite/${instrumentName}-mp3.js`
+      `./static/soundfonts/MusyngKite/${instrumentName}-mp3.js`
     )
 
     this.promise.then((instrument) => {
