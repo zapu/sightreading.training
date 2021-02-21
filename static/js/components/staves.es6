@@ -147,7 +147,7 @@ export class Staff extends React.Component {
 
     let sigClass = keySignature.isFlat() ? "flat" : "sharp";
 
-    let src = keySignature.isFlat() ? "/static/svg/flat.svg" : "/static/svg/sharp.svg";
+    let src = keySignature.isFlat() ? "static/svg/flat.svg" : "static/svg/sharp.svg";
 
     return <div className="key_signature">
       {sigNotes.map((n, i) => {
@@ -174,7 +174,7 @@ export class GStaff extends Staff {
     keySignatureCenter: "F6",
     upperRow: 45,
     lowerRow: 37,
-    cleffImage: "/static/svg/clefs.G.svg",
+    cleffImage: "static/svg/clefs.G.svg",
     staffClass: "g_staff",
   }
 }
@@ -184,7 +184,7 @@ export class FStaff extends Staff {
     keySignatureCenter: "F4",
     upperRow: 33,
     lowerRow: 25,
-    cleffImage: "/static/svg/clefs.F_change.svg",
+    cleffImage: "static/svg/clefs.F_change.svg",
     staffClass: "f_staff",
   }
 }

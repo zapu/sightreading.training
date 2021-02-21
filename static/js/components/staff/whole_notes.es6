@@ -79,19 +79,19 @@ export default class WholeNotes extends React.PureComponent {
     }, noteClasses, props.staticNoteClasses)
 
     let parts = [
-      <img key="head" className="primary" src="/static/svg/noteheads.s0.svg" />
+      <img key="head" className="primary" src="static/svg/noteheads.s0.svg" />
     ]
 
     if (accidentals == 0) {
-      parts.push(<img key="natural" className="accidental natural" src="/static/svg/natural.svg" />)
+      parts.push(<img key="natural" className="accidental natural" src="static/svg/natural.svg" />)
     }
 
     if (accidentals == -1) {
-      parts.push(<img key="flat" className="accidental flat" src="/static/svg/flat.svg" />)
+      parts.push(<img key="flat" className="accidental flat" src="static/svg/flat.svg" />)
     }
 
     if (accidentals == 1) {
-      parts.push(<img key="sharp" className="accidental sharp" src="/static/svg/sharp.svg" />)
+      parts.push(<img key="sharp" className="accidental sharp" src="static/svg/sharp.svg" />)
     }
 
     return <div
