@@ -13,10 +13,10 @@ install:
 	@test $(INSTALL_PATH) || ( echo "INSTALL_PATH is not set"; exit 1 )
 	@test -d $(INSTALL_PATH) || ( echo "$(INSTALL_PATH) is not a directory"; exit 1 )
 
-	cp bundle.js "$(INSTALL_PATH)/"
-	cp standalone.html "$(INSTALL_PATH)/index.html"
+	rsync -u bundle.js "$(INSTALL_PATH)/bundle.js"
+	rsync -u standalone.html "$(INSTALL_PATH)/index.html"
 	mkdir -p "$(INSTALL_PATH)/static/scss"
-	cp static/scss/bundle.css "$(INSTALL_PATH)/static/scss/bundle.css"
-	cp -r static/img "$(INSTALL_PATH)/static/img"
-	cp -r static/svg "$(INSTALL_PATH)/static/svg"
-	cp -r static/soundfonts "$(INSTALL_PATH)/static/soundfonts"
+	rsync -u static/scss/bundle.css "$(INSTALL_PATH)/static/scss/bundle.css"
+	rsync -u -r static/img "$(INSTALL_PATH)/static/img"
+	rsync -u -r static/svg "$(INSTALL_PATH)/static/svg"
+	rsync -u -r static/soundfonts "$(INSTALL_PATH)/static/soundfonts"
