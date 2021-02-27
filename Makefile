@@ -1,9 +1,9 @@
 
-.PHONY: bundle scss
+.PHONY: bundle scss typecheck
 
 all: bundle.js scss
 
-bundle.js: $(wildcard static/js/*.es6 static/js/**/*.es6)
+bundle.js: $(wildcard static/js/*.tsx static/js/**/*.tsx static/js/*.ts static/js/**/*.ts)
 	node esbuild.js
 
 scss:
@@ -20,3 +20,6 @@ install:
 	rsync -u -r static/img/ "$(INSTALL_PATH)/static/img"
 	rsync -u -r static/svg/ "$(INSTALL_PATH)/static/svg"
 	rsync -u -r static/soundfonts/ "$(INSTALL_PATH)/static/soundfonts"
+
+typecheck:
+	./node_modules/.bin/tsc

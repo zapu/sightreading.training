@@ -11,10 +11,6 @@ const sightreadingResolve = {
       return ret
     })
 
-    build.onResolve({ filter: /^lib$/ }, (args) => {
-      return { path: module.path + '/static/lib.es6' }
-    })
-
     build.onLoad({ filter: /\.es6$/ }, async (args) => {
       return {
         contents: await fs.promises.readFile(args.path, 'utf8'),
@@ -25,7 +21,7 @@ const sightreadingResolve = {
 }
 
 require('esbuild').build({
-  entryPoints: ['static/js/main.es6'],
+  entryPoints: ['static/js/main.tsx'],
   platform: 'browser',
   target: 'safari11',
   bundle: true,

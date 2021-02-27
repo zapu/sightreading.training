@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "isolatedModules": true,
+        "esModuleInterop": true,
+        "baseUrl": "static/js",
+        "jsx": "react",
+        "noEmit": true,
+    },
+    "include": ["static/js"],
+}
